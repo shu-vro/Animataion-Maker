@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <meta name="keywords" content="Document" />
+        <meta name="description" content="Your Description..." />
+        <title>Document</title>
+        <link rel="stylesheet" href="resources/css/style.css" />
+        <link
+            rel="shortcut icon"
+            href="resources/img/favicon.ico"
+            type="image/x-icon"
+        />
+    </head>
+    <body>
+        <canvas class="canvas"></canvas>
+        <label class="nav active">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </label>
+        <nav class="content">
+            <div class="controls">
+                <button id="create_animation">Create Animation</button>
+                <button id="demo">Start Demo</button>
+                <button id="clear" title="Copy Before Clearing Canvas.">
+                    Clear Canvas
+                </button>
+                <button id="copy">Copy Animation</button>
+            </div>
+
+            <div class="info">
+                <h1 class="say">Controls</h1>
+
+                <table border="0" cellspacing="15">
+                    <tr>
+                        <td>
+                            <label for="name">Animation Name: </label>
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                id="name"
+                                value="animate"
+                                required
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="d">Animation Duration: </label>
+                        </td>
+                        <td>
+                            <input
+                                type="number"
+                                id="d"
+                                min="0"
+                                title="If you don't select this, it will be automatically selected."
+                                placeholder="Default"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="timing_function"
+                                >Animation Timing Function:
+                            </label>
+                        </td>
+                        <td>
+                            <select id="timing_function">
+                                <option
+                                    value="linear"
+                                    selected
+                                    aria-required="true"
+                                >
+                                    Linear
+                                </option>
+                                <option value="ease">Ease</option>
+                                <option value="ease-in">Ease In</option>
+                                <option value="ease-out">Ease Out</option>
+                                <option value="ease-in-out">Ease In Out</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="delay">Animation Delay</label>
+                        </td>
+                        <td>
+                            <input type="number" id="delay" value="0" min="0" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="iteration_count">Iteration Count</label>
+                        </td>
+                        <td>
+                            <select id="iteration_count">
+                                <option value="infinite">Infinite</option>
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="px-pt">Select Unit</label>
+                        </td>
+                        <td>
+                            <select id="px-pt">
+                                <option value="px" selected>Pixel</option>
+                                <option value="%">Percent</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="console"></div>
+            <textarea id="output_hidden_for_copying" readonly></textarea>
+        </nav>
+        <script src="resources/js/main.js"></script>
+    </body>
+</html>

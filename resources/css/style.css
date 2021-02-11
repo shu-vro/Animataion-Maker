@@ -1,0 +1,337 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", "Gill Sans", "Gill Sans MT", Calibri,
+        "Trebuchet MS", sans-serif;
+}
+
+body::before {
+    content: 'Animate Canvas';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15vw;
+    text-align: center;
+    font-weight: 900;
+    color: rgb(0, 0, 0, 0.15);
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+nav {
+    position: absolute;
+    right: 0;
+    max-height: 70%;
+    max-width: 450px;
+}
+
+nav.content {
+    margin-top: 80px;
+    background: #f2f4f7;
+    opacity: 1;
+    clip-path: polygon(-110% 0, 100% 0, 100% 150%, -110% 150%);
+    transform-origin: top right;
+    /* transform: scale(1); */
+    transition: 1s ease-in-out;
+}
+
+nav.content.inactive {
+    clip-path: polygon(100% 0, 100% 0%, 100% 0, 100% 0);
+    opacity: 0;
+    /* transform: scale(0); */
+    transition: 1s ease-in-out;
+}
+
+nav .controls {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+nav .controls button {
+    color: #000;
+    background: white;
+    outline: none;
+    border: none;
+    padding: 7px 14px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 100px;
+    box-shadow: -2px -2px 4px #ffffff, -3px -3px 10px hsla(0, 0%, 100%, 0.48),
+        2px 2px 4px #000000, -3px -3px 10px rgb(0, 0, 0, 0.5);
+}
+
+nav .controls button:hover {
+    box-shadow: inset -2px -2px 4px #ffffff,
+        inset -3px -3px 10px rgba(255, 255, 255, 0.479),
+        inset 2px 2px 4px #000000, inset -3px -3px 10px rgba(0, 0, 0, 0.5);
+}
+
+#output_hidden_for_copying {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    resize: none;
+}
+
+.console {
+    position: absolute;
+    transform: translate3d(-100%, -70%, 0);
+    width: 0;
+    height: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-shadow: 0 0 10px rgb(0, 0, 0, 0.5), 0 0 20px rgb(0, 0, 0, 0.5), 0 0 30px rgb(0, 0, 0, 0.5);
+    transition: 1s ease-in-out;
+}
+
+.console.shown {
+    height: 250px;
+    width: 100%;
+}
+
+.console.shown::-webkit-scrollbar, 
+.info::-webkit-scrollbar {
+    width: 5px;
+}
+
+.console.shown::-webkit-scrollbar-thumb,
+.info::-webkit-scrollbar-thumb {
+    width: 5px;
+    height: 10px;
+    background: orangered;
+    border-radius: 100px;
+}
+
+.console span {
+    margin-left: 15px;
+}
+
+.console hr {
+    width: 100%;
+    height: 3px;
+    background: #555;
+}
+
+.info table input {
+    outline: none;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+.info table select {
+    outline: none;
+    font-size: 20px;
+    background: dodgerblue;
+    border-radius: 5px;
+}
+
+.info tr td {
+    font-weight: 600;
+}
+
+.nav {
+    position: relative;
+    float: right;
+    margin: 20px 20px 0 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.nav .bar1,
+.nav .bar2,
+.nav .bar3 {
+    position: absolute;
+    width: 35px;
+    height: 6px;
+    border-radius: 200px;
+    background: black;
+    transition: 0.5s ease-in-out;
+}
+
+.nav:hover .bar1,
+.nav:hover .bar2,
+.nav:hover .bar3 {
+    width: 45px;
+}
+
+.nav .bar1 {
+    transform: translate(0, -15px);
+    animation: no_bar1 .75s linear 0s 1 forwards;
+}
+
+.nav .bar3 {
+    transform: translate(0, 15px);
+    animation: no_bar3 .75s linear 0s 1 forwards;
+}
+
+.nav .bar3::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35px;
+    border-radius: 10px;
+    background: #000;
+    height: 6px;
+    transition: 0.5s ease-in-out;
+}
+
+.nav:hover .bar3::after {
+    width: 45px;
+}
+
+@keyframes no_bar1 {
+    0% {
+        transform: rotate(45deg);
+    }
+
+    33.33% {
+        transform: translate(0, 0);
+    }
+
+    66.66% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, -15px);
+    }
+}
+
+@keyframes no_bar3 {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    33.33% {
+        transform: translate(0, 0);
+    }
+
+    66.66% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 15px);
+    }
+}
+
+.nav.active .bar1 {
+    animation: bar1 .75s linear 0s 1 forwards;
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+
+@keyframes bar1 {
+    0% {
+        transform: translate(0, -15px);
+    }
+
+    33.33% {
+        transform: translate(0, 0);
+    }
+
+    66.66% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+.nav.active .bar3 {
+    animation: bar3 .75s linear 0s 1 forwards;
+}
+
+@keyframes bar3 {
+    0% {
+        transform: translate(0, 15px);
+    }
+
+    33.33% {
+        transform: translate(0, 0);
+    }
+
+    66.66% {
+        transform: translate(0, 0);
+        height: 16px;
+        background: #ffffff;
+    }
+
+    100% {
+        transform: rotate(-45deg);
+        height: 16px;
+        background: #ffffff;
+    }
+}
+
+.nav.active .bar2 {
+    width: 0;
+}
+
+@media (max-width: 907px) {
+    .console.shown {
+        height: 250px;
+        width: 50%;
+    }
+}
+
+@media (max-width: 679px) {
+    nav.content {
+        width: 100vw;
+        height: calc(100% - 80px);
+    }
+
+    .info {
+        width: 100%;
+        height: 50%;
+        overflow-y: scroll;
+    }
+
+    .console {
+        position: relative;
+        transform: translate3d(0, 0%, 0);
+        width: 0;
+        height: 0;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .console.shown {
+        height: 30%;
+        width: 100%;
+    }
+
+    nav .controls {
+        width: 100%;
+    }
+}
