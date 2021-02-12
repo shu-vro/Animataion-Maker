@@ -10,6 +10,7 @@ const t_fun = document.getElementById("timing_function");
 const i_count = document.getElementById("iteration_count");
 const duration = document.getElementById("d");
 const copy_cont = document.getElementById("output_hidden_for_copying");
+const alertBx = document.getElementById("alertBx");
 const navBtn = document.querySelector(".nav");
 const nav_content = document.querySelector(".content");
 const consoleBx = document.querySelector(".console");
@@ -49,7 +50,7 @@ function startDraw(e) {
 
     let clock = new Date();
     or_time += clock.getTime();
-    
+
     navBtn.classList.remove("active");
     nav_content.classList.add("inactive");
 }
@@ -110,6 +111,15 @@ function DrawMobile(e) {
     ctx.moveTo(e.changedTouches[0].pageX, e.changedTouches[0].pageY);
 }
 
+function getAlert(text) {
+    alertBx.textContent = text;
+    alertBx.classList.add("active");
+
+    setTimeout(() => {
+        alertBx.classList.remove("active");
+    }, 2000);
+}
+
 demo.addEventListener("click", () => {
     navBtn.classList.toggle("active");
     nav_content.classList.toggle("inactive");
@@ -136,6 +146,7 @@ demo.addEventListener("click", () => {
     if (demo.classList.contains("on")) {
         document.body.appendChild(demoBox);
         demo.textContent = "Close Demo";
+        getAlert("Releasing Demo");
     } else {
         document.querySelector(".demoBox").remove();
         demo.textContent = "Start Demo";
@@ -149,6 +160,7 @@ clear.addEventListener("click", () => {
     arr = [];
     animation = "";
     consoleBx.innerHTML = "";
+    copy_cont.value = "";
     navBtn.classList.toggle("active");
     nav_content.classList.toggle("inactive");
 
@@ -165,9 +177,11 @@ clear.addEventListener("click", () => {
     t_fun.value = "linear";
     delay.value = "0";
     i_count.value = "1";
+    getAlert("Clearing Screen...");
 });
 
 cr_b.addEventListener("click", () => {
+    getAlert(`${Name.value} created 😀`);
     let l = arr.length;
     function creAnim() {
         let result = "";
@@ -225,6 +239,7 @@ navBtn.addEventListener("click", (e) => {
 });
 
 copy.addEventListener("click", (e) => {
+    getAlert(`${Name.value} copied 🤩`);
     copy_cont.value = `
 ${animation}
 
